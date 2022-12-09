@@ -1,0 +1,132 @@
+<html>
+<head>
+</head>
+<title>Automatic approval</title>
+
+<style>
+  .tb { border-collapse: collapse; }
+  .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+  .tb th { background-color: #403D39; }
+  .tb th { color: white; }
+</style>
+
+<style>
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #403D39;
+  border: none;
+  color: white;
+  padding: 25px;
+  text-decoration: none;
+  margin: 4px 1px;
+  cursor: pointer;
+}
+</style>
+
+<style>
+    body {
+        background-color: #CCC5B9;
+    }
+
+    .login {
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	margin: -150px 0 0 -150px;
+	width:400px;
+	height:400px;
+    }
+
+    button {
+        background-color: #eb5e28;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+
+    }
+    button:hover {
+        background-color: rgb(250, 178, 24);
+        color: black;
+        cursor: pointer;
+    }
+    h1 {
+        color: #EB5E28;
+        text-align: center;
+        font-family: 'serif';
+
+        font-size: 60px;
+        margin-top: 3%;
+    }
+    input {
+        width: 75%;
+        height: 5%;
+        padding: 10px 10px;
+        font-size: 18px;
+    }
+    h3 {
+        color: black;
+        font-size: 20px;
+        margin-top: 60px;
+    }
+
+
+</style>
+
+
+<body>
+
+    <h1>Automatic Approval Demo</h1>
+<div class="login">
+
+    <div>
+<form method="post" action="{{ url_for('predict') }}">
+
+    <h3>Please input the following information:</h3><br><br>
+    <input type="text" name="Account" placeholder="Account_name" required="required" /><br><br><br>
+    <input type="text" name="Application requested" placeholder="Application" required="required" /><br><br><br>
+    <input type="text" name="Request type" placeholder="Request_type" required="required" /><br><br><br>
+    <input type="text" name="Request Status" placeholder="Request_status" required="required" /><br><br><br>
+    <input type="text" name="Entitlement" placeholder="Entitlement" required="required" /><br><br><br>
+    <input type="text" name="Entitlement value" placeholder="Entitlement_Entitlement" required="required" /><br><br><br>
+    <input type="text" name="Approval type" placeholder="Approval_type" required="required" /><br><br><br><br>
+
+    <button align = center, type="submit">Save</button>
+    <p>{{ saved }} </p>
+     {% for i in features %}
+       <th>{{ i }} &nbsp </th>
+     {% endfor %}
+
+</form>
+<form method="post" action="{{ url_for('recommend') }}">
+
+
+
+    <input type="submit" name="Approval" value="Approval">
+    <input type="submit" name="Recommend" value="Recommend">
+
+
+
+
+<h3>{{prediction}}</h3>
+<div data-show-if="recommend:recommend">
+    <table >
+    <tr>
+        <h2 >{{txt}}</h2>
+    </tr><br>
+   {% for i in recommend %}
+  <tr>
+   <td>{{ i }} </td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+
+
+</form>
+
+</div>
+</div>
+</body>
+</html>
